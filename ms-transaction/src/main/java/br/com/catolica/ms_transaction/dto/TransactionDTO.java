@@ -1,4 +1,4 @@
-package br.com.catolica.ms_transaction.domain.dto;
+package br.com.catolica.ms_transaction.dto;
 
 import jakarta.persistence.Column;
 import lombok.Builder;
