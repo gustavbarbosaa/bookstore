@@ -63,68 +63,38 @@ public class TransactionService {
                 .toList();
     }
 
-    public TransactionDTO verificaMulta(Long id) throws Exception {
-        var movimentacao = transactionRepository.findById(id).orElse(null);
+    public TransactionDTO verifyFine(Long id) throws NullPointerException {
+        var transaction = transactionRepository.findById(id).orElse(null);
 
-        if (movimentacao == null) {
-            throw new Exception("Movimentação não foi encontrada");
+        if (transaction == null) {
+            throw new NullPointerException("Movimentação não foi encontrada");
         }
 
-        LocalDateTime prazo = movimentacao.getLoanDate().plusDays(3);
-        LocalDateTime dataAtual = LocalDateTime.now();
+        LocalDateTime term = transaction.getLoanDate().plusDays(3);
+        LocalDateTime currentDate = LocalDateTime.now();
 
-        if (prazo.isBefore(dataAtual)) {
-            Period diferenca = Period.between(prazo.toLocalDate(), dataAtual.toLocalDate());
-            int totalDias = diferenca.getYears() * 365 + diferenca.getMonths() * 30 + diferenca.getDays();
-            double valorMulta = 1.00 * totalDias;
+        if (term.isBefore(currentDate)) {
+            Period difference = Period.between(term.toLocalDate(), currentDate.toLocalDate());
+            int totalDays = difference.getYears() * 365 + difference.getMonths() * 30 + difference.getDays();
+            double fineValue = 1.00 * totalDays;
 
-            movimentacao.setFineValue(BigDecimal.valueOf(valorMulta));
-            movimentacao.setReturnDate(dataAtual);
+            transaction.setFineValue(BigDecimal.valueOf(fineValue));
+            transaction.setReturnDate(currentDate);
 
-            transactionRepository.save(movimentacao);
-
-            UserDTO user = userTransaction.getUserById(movimentacao.getUserId());
-            BookDTO book = bookTransaction.getBookById(movimentacao.getBookId());
-
-            System.out.println(
-                    user.getName() + " está com o livro: " + book.getTitulo() +
-                            " com " + totalDias + " dias de atraso"
-            );
-        } else {
-
-            System.out.println("O livro ainda está no prazo de 3 dias!");
-
-            movimentacao.setLoanDate(dataAtual); // Atualiza a data do empréstimo, se necessário
-            transactionRepository.save(movimentacao);
+            transactionRepository.save(transaction);
         }
 
-        return transactionMapper.entityToDTO(movimentacao);
+        return transactionMapper.entityToDTO(transaction);
     }
 
-    public void movimentacoesComAtraso() {
+    public List<TransactionDTO> delayedMovements() {
 
-        List<Transaction> movimentacoesSemDevolucao = transactionRepository
+        List<Transaction> movementsWithoutReturn = transactionRepository
                 .findByReturnDateIsNullOrReturnDateBefore(LocalDateTime.now());
 
-        if (movimentacoesSemDevolucao.isEmpty()) {
-            System.out.println("Não existem movimentações com atraso!");
-        } else {
-            System.out.println("Movimentações com atraso:");
-        }
-
-
-        for (Transaction m : movimentacoesSemDevolucao) {
-
-            UserDTO user = userTransaction.getUserById(m.getUserId());
-            BookDTO book = bookTransaction.getBookById(m.getBookId());
-
-            System.out.println(
-                    "ID Transação: " + m.getId() +
-                            ", Usuário: " + (user != null ? user.getName() : "Desconhecido") + " (" + (user != null ? user.getCpf() : "N/A") + ")" +
-                            ", Livro: " + (book != null ? book.getTitulo() : "Desconhecido") +
-                            ", Data Empréstimo: " + m.getLoanDate() +
-                            ", Data Devolução Esperada: " + m.getReturnDate()
-            );
-        }
+        return movementsWithoutReturn
+                .stream()
+                .map(transactionMapper::entityToDTO)
+                .toList();
     }
 }

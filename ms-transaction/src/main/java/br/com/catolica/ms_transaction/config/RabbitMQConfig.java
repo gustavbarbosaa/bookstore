@@ -37,7 +37,6 @@ public class RabbitMQConfig {
                 .with(emailRoutingKey);
     }
 
-
     @Bean
     public Jackson2JsonMessageConverter jackson2JsonMessageConverter() {
         return new Jackson2JsonMessageConverter();

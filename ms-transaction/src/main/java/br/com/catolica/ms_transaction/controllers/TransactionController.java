@@ -13,10 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-
-
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/transaction")
@@ -29,25 +26,20 @@ public class TransactionController {
         return ResponseEntity.status(HttpStatus.CREATED).body(transactionService.save(transactionDTO));
     }
 
-
     @GetMapping
-    public ResponseEntity<List<TransactionDTO>> getAllTransaction() {return ResponseEntity.ok().body(transactionService.getAll());}
-
-    @GetMapping("/movimentacoesatraso")
-    public ResponseEntity<Void> getMovimentacoesComAtraso() {
-        transactionService.movimentacoesComAtraso();
-        return ResponseEntity.ok().build();
+    public ResponseEntity<List<TransactionDTO>> getAllTransactions() {
+        return ResponseEntity.ok().body(transactionService.getAll());
     }
 
-    @GetMapping("/verificarmulta/{id}")
-    public ResponseEntity<TransactionDTO> verifyFine(@PathVariable Long id) {
-        try {
-            TransactionDTO transactionDTO = transactionService.verificaMulta(id);
+    @GetMapping("/delayed-movements")
+    public ResponseEntity<List<TransactionDTO>> getDelayedMovements() {
+        return ResponseEntity.ok().body(transactionService.delayedMovements());
+    }
 
-            return ResponseEntity.ok(transactionDTO);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
-        }
+    @GetMapping("/verify-fine/{id}")
+    public ResponseEntity<TransactionDTO> verifyFine(@PathVariable Long id) throws Exception {
+        TransactionDTO transactionDTO = transactionService.verifyFine(id);
+        return ResponseEntity.ok().body(transactionDTO);
     }
 
 }
