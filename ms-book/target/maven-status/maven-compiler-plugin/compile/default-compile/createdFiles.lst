@@ -1,0 +1,10 @@
+br\com\catolica\ms_book\domain\Book$BookBuilder.class
+br\com\catolica\ms_book\service\BookService.class
+br\com\catolica\ms_book\MsBookApplication.class
+br\com\catolica\ms_book\controller\BookController.class
+br\com\catolica\ms_book\mapper\BookMapper.class
+br\com\catolica\ms_book\dto\BookDTO$BookDTOBuilder.class
+br\com\catolica\ms_book\dto\BookDTO.class
+br\com\catolica\ms_book\mapper\BookMapperImpl.class
+br\com\catolica\ms_book\repository\BookRepository.class
+br\com\catolica\ms_book\domain\Book.class

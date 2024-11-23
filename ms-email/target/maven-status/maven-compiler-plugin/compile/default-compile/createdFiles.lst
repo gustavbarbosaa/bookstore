@@ -1,0 +1,5 @@
+br\com\catolica\ms_email\config\RabbitMQConfig.class
+br\com\catolica\ms_email\dto\EmailDTO.class
+br\com\catolica\ms_email\dto\EmailDTO$EmailDTOBuilder.class
+br\com\catolica\ms_email\services\EmailService.class
+br\com\catolica\ms_email\MsEmailApplication.class
