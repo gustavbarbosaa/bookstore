@@ -12,7 +12,10 @@ spring:
         registration:
           keycloak:
             client-id: gateway
+            client-secret: rl9TNIKMBzsSS5UbE2vPVYSMoZSE42IK
             scope: openid
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:9000/login/oauth2/code/keycloak
         provider:
           keycloak:
             issuerUri: http://localhost:8080/realms/bookstore
