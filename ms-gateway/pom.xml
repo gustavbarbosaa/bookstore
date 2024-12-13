@@ -32,16 +32,14 @@
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-webflux</artifactId>
+			<groupId>jakarta.servlet</groupId>
+			<artifactId>jakarta.servlet-api</artifactId>
+			<version>5.0.0</version>  <!-- Choose the version that is compatible with your project -->
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
-		</dependency>
-		<dependency>
-				<groupId>org.springframework.security</groupId>
-				<artifactId>spring-security-oauth2-jose</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
