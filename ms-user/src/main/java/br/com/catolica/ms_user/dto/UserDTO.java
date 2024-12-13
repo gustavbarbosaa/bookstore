@@ -20,6 +20,8 @@ public class UserDTO {
     @Email(message = "Email inválio")
     @NotNull(message = "O campo email é obrigatório!")
     private String email;
+    @NotNull(message = "O campo senha é obrigatório!")
+    private String password;
     @NotNull(message = "O campo email é obrigatório!")
     private String phone;
     @NotNull(message = "O campo CPF é obrigatório!")

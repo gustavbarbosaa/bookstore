@@ -22,8 +22,6 @@ public class BookDTO {
     private String editora;
     @NotNull(message = "O campo edição é obrigatório!")
     private String edicao;
-    @NotNull(message = "O campo categoria é obrigatório!")
-    private String categoria;
     @NotNull(message = "O campo ISBN é obrigatório!")
     private String isbn;
 }

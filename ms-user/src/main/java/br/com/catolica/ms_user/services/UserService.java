@@ -5,8 +5,8 @@ import br.com.catolica.ms_user.dto.UserDTO;
 import br.com.catolica.ms_user.mapper.UserMapper;
 import br.com.catolica.ms_user.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,6 +16,7 @@ import java.util.Optional;
 public class UserService {
     private final UserRepository userRepository;
     private final UserMapper userMapper;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public List<UserDTO> getAll() {
         return userRepository.findAll()
@@ -32,6 +33,8 @@ public class UserService {
         Optional.ofNullable(userDTO.getId()).ifPresent(ex -> {
             throw new IllegalArgumentException("O id deve ser nulo");
         });
+
+        userDTO.setPassword(bCryptPasswordEncoder.encode(userDTO.getPassword()));
 
         User user = userRepository.save(userMapper.dtoToEntity(userDTO));
 

@@ -4,6 +4,11 @@ server:
     context-path: /transaction
 
 spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8080/realms/gateway
   application:
     name: ms-transaction
   datasource:
@@ -34,3 +39,9 @@ feign:
   users:
     name: users
     url: http://localhost:8081/user/v1/users
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    defaultZone: http://localhost:8761/eureka

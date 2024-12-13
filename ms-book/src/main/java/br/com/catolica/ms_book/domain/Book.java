@@ -32,7 +32,5 @@ public class Book {
     @Column(nullable = false)
     private String edicao;
     @Column(nullable = false)
-    private String categoria;
-    @Column(nullable = false)
     private String isbn;
 }

@@ -34,6 +34,10 @@ public class User {
     private String email;
 
     @Column(nullable = false, unique = true)
+    @NotNull(message = "O campo password é obrigatório!")
+    private String password;
+
+    @Column(nullable = false, unique = true)
     @NotNull(message = "O campo phone é obrigatório!")
     private String phone;
 
