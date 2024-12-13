@@ -1,0 +1,63 @@
+{
+  // Use o IntelliSense para saber mais sobre os atributos possíveis.
+  // Focalizar para exibir as descrições dos atributos existentes.
+  // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Current File",
+      "request": "launch",
+      "mainClass": "${file}"
+    },
+    {
+      "type": "java",
+      "name": "GatewayApplication",
+      "request": "launch",
+      "mainClass": "br.com.catolica.gateway.GatewayApplication",
+      "projectName": "gateway"
+    },
+    {
+      "type": "java",
+      "name": "MsBookApplication",
+      "request": "launch",
+      "mainClass": "br.com.catolica.ms_book.MsBookApplication",
+      "projectName": "ms-book"
+    },
+    {
+      "type": "java",
+      "name": "MsEmailApplication",
+      "request": "launch",
+      "mainClass": "br.com.catolica.ms_email.MsEmailApplication",
+      "projectName": "ms-email"
+    },
+    {
+      "type": "java",
+      "name": "MsEurekaApplication",
+      "request": "launch",
+      "mainClass": "br.com.catolica.ms_eureka.MsEurekaApplication",
+      "projectName": "ms-eureka"
+    },
+    {
+      "type": "java",
+      "name": "MsGatewayApplication",
+      "request": "launch",
+      "mainClass": "br.com.catolica.ms_gateway.MsGatewayApplication",
+      "projectName": "ms-gateway"
+    },
+    {
+      "type": "java",
+      "name": "MsTransactionApplication",
+      "request": "launch",
+      "mainClass": "br.com.catolica.ms_transaction.MsTransactionApplication",
+      "projectName": "ms-transaction"
+    },
+    {
+      "type": "java",
+      "name": "MsUserApplication",
+      "request": "launch",
+      "mainClass": "br.com.catolica.ms_user.MsUserApplication",
+      "projectName": "ms-user"
+    }
+  ]
+}

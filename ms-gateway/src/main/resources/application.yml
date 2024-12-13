@@ -1,0 +1,54 @@
+server:
+  port: 9000
+spring:
+  main:
+    web-application-type: reactive
+    allow-bean-definition-overriding: true
+  application:
+    name: ms-gateway
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            client-id: gateway
+            client-secret: rl9TNIKMBzsSS5UbE2vPVYSMoZSE42IK
+            scope: openid
+            authorization-grant-type: authorization_code
+            redirect-uri: http://localhost:9000/login/oauth2/code/keycloak
+        provider:
+          keycloak:
+            issuerUri: http://localhost:8080/realms/bookstore
+      resourceserver:
+        jwt:
+          issuerUri: http://localhost:8080/realms/bookstore
+  cloud:
+    gateway:
+      routes:
+        - id: ms-user
+          uri: http://localhost:8081
+          predicates:
+            - Path=/user/**
+        - id: ms-book
+          uri: http://localhost:8082
+          predicates:
+            - Path=/book/**
+        - id: ms-transaction
+          uri: http://localhost:8083
+          predicates:
+            - Path=/transaction/**
+        - id: ms-email
+          uri: http://localhost:8084
+          predicates:
+            - Path=/email/**
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    defaultZone: http://localhost:8761/eureka
+
+
